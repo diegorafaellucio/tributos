@@ -1,0 +1,61 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento community edition
+ * aheadWorks does not guarantee correct work of this extension
+ * on any other Magento edition except Magento community edition.
+ * aheadWorks does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Onestepcheckout
+ * @version    1.2.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?>
+<?php $blockNumber = $this->getBlockNumber(); ?>
+<?php $blockNumberClass = (!is_null($blockNumber)) ? "aw-onestepcheckout-number-{$blockNumber}" : ""; ?>
+<p style="height: 55px" class="aw-onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $this->__('DESTINO DOS PRODUTOS'); ?></p>
+<div id="aw-onestepcheckout-consumption-method" class="aw-onestepcheckout-add-loader-into-this-block" >
+    <dl class="cm-methods">
+        <dd>
+            <ul>
+                <li>
+                    <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="0" id="c_method_0" class="radio"/>
+                    <label for="c_method_0">
+                        Uso e/ou Consumo
+                    </label>
+                </li>
+                <li>
+                    <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="1" id="c_method_1"  class="radio"/>
+                    <label for="c_method_1">
+                        Revenda
+                    </label>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <div class="validation-advice" style="display: none;"></div>
+    <script type="text/javascript">
+        var awOSCConsumption = new IspshopOnestepcheckoutForConsumption({
+            containerSelector: "#aw-onestepcheckout-consumption-method",
+            switchMethodInputsSelector: "input[type='radio'][name='consumption_method']",
+            saveShipmentUrl: <?php echo Zend_Json::encode($this->getSaveConsumptiontUrl()); ?>
+        });
+    </script>
+    <?php echo $this->getChildHtml('extra'); ?>
+</div>
+

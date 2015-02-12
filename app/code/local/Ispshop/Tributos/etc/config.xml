@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ispshop_Tributos>
+            <version>1.0.0</version>
+        </Ispshop_Tributos>
+    </modules>
+     
+    <global>
+        
+        <fieldsets>
+            <sales_convert_quote>
+                <amount_st>
+                    <to_order>*</to_order>
+                </amount_st>
+                <amount_icms>
+                    <to_order>*</to_order>
+                </amount_icms>
+            </sales_convert_quote>
+            <sales_convert_quote_item>
+                <value_st>
+                    <to_order_item>*</to_order_item>
+                </value_st>
+                <value_icms>
+                    <to_order_item>*</to_order_item>
+                </value_icms>
+                <price_st_icms>
+                    <to_order_item>*</to_order_item>
+                </price_st_icms>
+            </sales_convert_quote_item>
+            <sales_convert_order_item>
+                <value_st>
+                    <to_invoice_item>*</to_invoice_item>
+                    <to_creditmemo_item>*</to_creditmemo_item>
+                </value_st>
+                <value_icms>
+                    <to_invoice_item>*</to_invoice_item>
+                    <to_creditmemo_item>*</to_creditmemo_item>
+                </value_icms>
+                <price_st_icms>
+                    <to_invoice_item>*</to_invoice_item>
+                    <to_creditmemo_item>*</to_creditmemo_item>
+                </price_st_icms>
+            </sales_convert_order_item>
+        </fieldsets>
+        
+        <sales>
+            <quote>
+                <totals>
+                    <substituicao_tributaria>
+                        <class>ispshop_tributos/sales_quote_address_total_substituicaotributaria</class>
+                    </substituicao_tributaria>
+                </totals>
+                <after>subtotal</after>
+                <renderer>
+                    ispshop_tributos/customer_substituicaotributaria 
+                </renderer>
+            </quote>
+            
+            <quote>
+                <totals>
+                    <icms>
+                        <class>ispshop_tributos/sales_quote_address_total_icms</class>
+                    </icms>
+                </totals>
+                <after>subtotal</after>
+                <renderer>
+                    ispshop_tributos/customer_substituicaotributaria 
+                </renderer>
+            </quote>
+            
+            <order_invoice>
+                <totals>
+                    <substituicao_tributaria>
+                        <class>
+                            ispshop_tributos/sales_order_invoice_total_substituicaotributaria
+                        </class>
+                        <after>subtotal</after>
+                    </substituicao_tributaria>
+                </totals>
+            </order_invoice>
+            
+            <order_invoice>
+                <totals>
+                    <icms>
+                        <class>
+                            ispshop_tributos/sales_order_invoice_total_icms
+                        </class>
+                        <after>subtotal</after>
+                    </icms>
+                </totals>
+            </order_invoice>
+            
+            <order_creditmemo>
+                <totals>
+                    <substituicao_tributaria>
+                        <class>
+                            ispshop_tributos/sales_order_creditmemo_total_substituicaotributaria
+                        </class>
+                        <after>subtotal</after>
+                    </substituicao_tributaria>
+                </totals>
+            </order_creditmemo>
+            
+            <order_creditmemo>
+                <totals>
+                    <icms>
+                        <class>
+                            ispshop_tributos/sales_order_creditmemo_total_icms
+                        </class>
+                        <after>subtotal</after>
+                    </icms>
+                </totals>
+            </order_creditmemo>
+        </sales>
+        
+        
+        <helpers>
+            <ispshop_tributos>
+                <!-- This is where we define our helper directory -->
+                <class>Ispshop_Tributos_Helper</class>
+            </ispshop_tributos>
+        </helpers>
+                    
+        <blocks>
+            <ispshop_tributos>
+                <!-- Set a block definition and lookup directory -->
+                <class>Ispshop_Tributos_Block</class>
+            </ispshop_tributos>
+        </blocks>
+         
+        <models>
+            <ispshop_tributos>
+                <!-- This is where we define our model directory -->
+                <class>Ispshop_Tributos_Model</class>
+                <!-- Define a resource to create a custom table -->
+                <resourceModel>ispshop_tributos_mysql4</resourceModel>
+            </ispshop_tributos>
+             
+            <!-- Here's our resource model we'll use to create a database table -->
+            <ispshop_tributos_mysql4>
+                <class>Ispshop_Tributos_Model_Mysql4</class>
+                <entities>
+                    <!-- Let's define our table, we'll call it with the ncm name, but the real table is ispshop_tributos_ncm -->
+                    <!-- After we define our entity, we can call it with our model by calling ispshop_tributos/ncm -->
+                    <ncm>
+                        <table>ispshop_tributos_ncm</table>
+                    </ncm>
+                    
+                    <monitoramento>
+                        <table>ispshop_tributos_monitoramento</table>
+                    </monitoramento>
+                    
+                    <log>
+                        <table>ispshop_tributos_log</table>
+                    </log>
+                </entities>
+            </ispshop_tributos_mysql4>
+        </models>
+         
+        <!-- And finally we define our resource setup script -->
+        <resources>
+            <ispshop_tributos_setup>
+                <setup>
+                    <module>Ispshop_Tributos</module>
+                </setup>
+            </ispshop_tributos_setup>
+        </resources>
+        
+        
+    </global>
+    
+    <default>
+        <tab1>
+            <general>
+                <text_field>Default value</text_field>
+            </general>
+        </tab1>
+    </default>
+     
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <!-- This is how we load our Adminhtml controllers -->
+                    <modules>
+                        <Ispshop_Tributos before="Mage_Adminhtml">Ispshop_Tributos_Adminhtml</Ispshop_Tributos>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    
+    <frontend>
+        <routers>
+            <ispshop_tributos>
+                <use>standard</use>
+                <args>
+                    <module>Ispshop_Tributos</module>
+                    <frontName>ispshop_tributos</frontName>
+                </args>
+            </ispshop_tributos>
+        </routers> 
+        
+        <layout>
+            <updates>
+                <ispshop_tributos>
+                    <!--
+                    We again keep a nice naming convention and make our module upgrade proof by placing it in a separate folder
+                    - Since we are in the adminhtml node, this will look for the XML file in the app/design/adminhtml/default/default root folder
+                    -->
+                    <file>ispshop/tributos.xml</file>
+                </ispshop_tributos>
+                <aw_onestepcheckout>
+                    <file>ispshop/onestepcheckout.xml</file>
+                </aw_onestepcheckout>
+                
+            </updates>
+        </layout> 
+    </frontend>
+     
+    <adminhtml>
+        <layout>
+            <updates>
+                <ispshop_tributos>
+                    <!--
+                    We again keep a nice naming convention and make our module upgrade proof by placing it in a separate folder
+                    - Since we are in the adminhtml node, this will look for the XML file in the app/design/adminhtml/default/default root folder
+                    -->
+                    <file>ispshop/tributos.xml</file>
+                </ispshop_tributos>
+            </updates>
+        </layout>
+        
+    </adminhtml>
+</config>

@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<layout>
+    
+    <ispshop_tributos_add_order_total>
+        <reference name="order_totals">
+            <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_substituicaotributaria" />
+            <block type="ispshop_tributos/sales_order_totals_icms" name="total_icms" />
+        </reference>
+    </ispshop_tributos_add_order_total>
+
+    <ispshop_tributos_add_invoice_total>
+        <reference name="invoice_totals">
+            <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_substituicaotributaria" />
+            <block type="ispshop_tributos/sales_order_totals_icms" name="total_icms" />
+        </reference>
+    </ispshop_tributos_add_invoice_total>
+
+    <ispshop_tributos_add_creditmemo_total>
+        <reference name="creditmemo_totals">
+            <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_substituicaotributaria" />
+            <block type="ispshop_tributos/sales_order_totals_icms" name="total_icms" />
+        </reference>
+    </ispshop_tributos_add_creditmemo_total>
+    <!-- Here, we reference the XML node path of our route -->
+    <adminhtml_ncm_index>
+        <reference name="content">
+            <!-- We also reference our block by namespacename_modulename/adminhtml_controllername, and name it uniquely -->
+            <block type="ispshop_tributos/adminhtml_ncm" name="ispshop_tributos_ncm" />
+        </reference>
+    </adminhtml_ncm_index>
+    
+    <adminhtml_log_index>
+        <reference name="content">
+            <!-- We also reference our block by namespacename_modulename/adminhtml_controllername, and name it uniquely -->
+            <block type="ispshop_tributos/adminhtml_log" name="ispshop_tributos_log" />
+        </reference>
+    </adminhtml_log_index>
+    
+    <adminhtml_update_index>
+        <reference name="content">
+            <!-- We also reference our block by namespacename_modulename/adminhtml_controllername, and name it uniquely -->
+            <block type="ispshop_tributos/adminhtml_update" name="ispshop_tributos_ncm_update" />
+        </reference>
+    </adminhtml_update_index>
+    
+    <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <block type="ispshop_tributos/adminhtml_catalog_product_edit_tabs_ncm" name="ispshop_tributos_ncm"/>
+            <action method="addTab">
+                <name>substituicao_tributaria</name>
+                <block>ispshop_tributos_ncm</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+    
+    <adminhtml_sales_order_view>
+        <update handle="ispshop_tributos_add_order_total" />
+        
+        <reference name="order_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/view/items.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_order_view_items_renderer_default</block>
+                <template>ispshop/sales/order/view/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+    
+    
+    <adminhtml_sales_order_invoice_new>
+        <update handle="ispshop_tributos_add_invoice_total" />
+        
+        <reference name="order_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/invoice/create/items.phtml</template>
+            </action>
+        
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>ispshop/sales/order/invoice/create/items/renderer/default.phtml</template>
+            </action>
+
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    
+    <adminhtml_sales_order_creditmemo_new>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+        
+        <reference name="order_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/creditmemo/create/items.phtml</template>
+            </action>
+        
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>ispshop/sales/order/creditmemo/create/items/renderer/default.phtml</template>
+            </action>
+
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    
+    
+    
+    <adminhtml_sales_order_invoice_updateqty>
+        <update handle="ispshop_tributos_add_invoice_total" />
+        
+        <reference name="order_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/invoice/create/items.phtml</template>
+            </action>
+        
+        
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>ispshop/sales/order/invoice/create/items/renderer/default.phtml</template>
+            </action>
+
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+        
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+        
+        <reference name="order_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/creditmemo/create/items.phtml</template>
+            </action>
+        
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>ispshop/sales/order/creditmemo/create/items/renderer/default.phtml</template>
+            </action>
+
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    
+    <adminhtml_sales_order_invoice_view>
+        <update handle="ispshop_tributos_add_invoice_total" />
+        
+        <reference name="invoice_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/invoice/view/items.phtml</template>
+            </action>
+        
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>ispshop/sales/order/invoice/view/items/renderer/default.phtml</template>
+            </action>
+
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    
+    <adminhtml_sales_order_creditmemo_view>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+        
+        <reference name="creditmemo_items">
+            
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/creditmemo/view/items.phtml</template>
+            </action>
+        
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>ispshop/sales/order/creditmemo/view/items/renderer/default.phtml</template>
+            </action>
+
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    
+      
+</layout>

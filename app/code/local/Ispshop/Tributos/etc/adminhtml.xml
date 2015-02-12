@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <!--
+        This item will be created in the Admin menu under Sales
+        - If you want another section, reference the appropriate adminhtml.xml file in app/code/core/Mage/Modulename/etc
+        - For example, we found out this was 'sales' by referencing the config/menu node of app/code/core/Mage/Sales/etc/adminhtml.xml
+        -->
+        <!--<catalog>
+            <children>
+                <ispshop_tributos_ncm translate="title" module="ispshop_tributos">
+                    <title>Substituição Tributária</title>
+                    <action>adminhtml/ncm</action>
+                </ispshop_tributos_ncm>
+            </children>
+        </catalog>-->
+        
+        <ispshop_tributos translate="title" module="ispshop_tributos">
+            <title>Substituição Tributária</title>
+            <sort_order>15</sort_order>
+            <children>
+                <ispshop_triobutos_update translate="title" module="ispshop_tributos">
+                    <title>Atualizar Tabela de Monitoramento</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/update</action>
+                </ispshop_triobutos_update>
+            </children>
+            <children>
+                <ispshop_tributos_ncm translate="title" module="ispshop_tributos">
+                    <title>Listar Substituições Tributárias</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/ncm</action>
+                </ispshop_tributos_ncm>
+            </children>
+            <children>
+                <ispshop_tributos_log translate="title" module="ispshop_tributos">
+                    <title>Logs de Atualização</title>
+                    <sort_order>3</sort_order>
+                    <action>adminhtml/log</action>
+                </ispshop_tributos_log>
+            </children>
+        </ispshop_tributos>
+    </menu>
+     
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <!-- Same as above, but instead of referencing the config/menu node, you reference the acl/resources node of adminhtml.xml -->
+                    <catalog>
+                        <children>
+                            <!-- Keep the same naming convention as above -->
+                            <ispshop_tributos_ncm>
+                                <!-- This is how the ACL text will be displayed on System > Permissions > Roles > Role > Role Resources -->
+                                <title>Substituição Tributária</title>
+                                <children>
+                                    <pode_excluir>
+                                        <title>Pode Excluir</title>
+                                    </pode_excluir>
+                                </children>
+                                <children>
+                                    <pode_cadastrar>
+                                        <title>Pode Cadastrar</title>
+                                    </pode_cadastrar>
+                                </children>
+                                <children>
+                                    <pode_editar>
+                                        <title>Pode Editar</title>
+                                    </pode_editar>
+                                </children>
+                            </ispshop_tributos_ncm>
+                        </children>
+                    </catalog>
+                </children>
+                
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ispshop_tributos_config>
+                                        <title>Ispshop Tributos Configuração</title> <!-- Used in resources tree -->
+                                    </ispshop_tributos_config>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+        
+        
+    </acl>
+</config>

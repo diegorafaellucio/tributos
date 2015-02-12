@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ispshop_tributos translate="label">
+            <label>Ispshop Tributos</label>
+            <sort_order>150</sort_order>
+        </ispshop_tributos>
+    </tabs>
+    <sections>
+        <ispshop_tributos_config translate="label" module="ispshop_tributos">
+            <label>Configuração</label>
+            <tab>ispshop_tributos</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>General</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <aliquota translate="label comment">
+                            <label>ICMS</label>
+                            <comment>Este campo apresenta a aliquota de ICMS para vendas dentro do estado</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </aliquota>
+                        <estado translate="label comment">
+                            <label>Estado</label>
+                            <comment>Estado de origem da venda dos produtos</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </estado>
+                    </fields>
+                </general>
+            </groups>
+        </ispshop_tributos_config>
+    </sections>
+</config>

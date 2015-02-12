@@ -1,0 +1,59 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_creditmemo = $this->getCreditmemo() ?>
+<?php $_order = $this->getOrder() ?>
+<?php if ($_creditmemo && $_order): ?>
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="border:1px solid #EF8003; border-radius:5px;">
+        <thead>
+            <tr style="font-family:'Arial Black', Gadget, sans-serif; font-size:13px; text-align:center; padding:10px; color:#FFFFFF; background:#EF8003;">
+                <th align="left" style="padding:3px 9px"><?php echo $this->__('Item') ?></th>
+                <th align="left" style="padding:3px 9px"><?php echo $this->__('Sku') ?></th>
+                <th align="center"  style="padding:3px 9px"><?php echo $this->__('Qty') ?></th>
+                <th align="right"  style="padding:3px 9px"><?php echo $this->__('ICMS') ?></th>
+                <th align="right"  style="padding:3px 9px"><?php echo $this->__('ST') ?></th>
+                <th align="right" style="padding:3px 9px"><?php echo $this->__('Subtotal') ?></th>
+            </tr>
+        </thead>
+
+        <?php $i = 0;
+        foreach ($_creditmemo->getAllItems() as $_item):
+            ?>
+            <?php if ($_item->getOrderItem()->getParentItem())
+                continue;
+            else
+                $i++;
+            ?>
+            <tbody>
+                <?php echo $this->getItemHtml($_item) ?>
+            </tbody>
+    <?php endforeach; ?>
+
+        <tfoot style="font-family:'Arial Black',Gadget,sans-serif;font-size:11px;text-align:center;padding:10px;">
+    <?php echo $this->getChildHtml('creditmemo_totals') ?>
+        </tfoot>
+    </table>
+<?php endif; ?>

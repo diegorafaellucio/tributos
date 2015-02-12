@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <aw_onestepcheckout_index_index>
+        <reference name="aw_onestepcheckout.onestep">
+            <block type="ispshop_tributos/customer_ncm" name="aw_onestepcheckout.onestep.form.consumptionmethod"
+                   as="for_consumption" template="ispshop/onestep/for_consumption.phtml">
+                <block type="core/text_list" name="aw_onestepcheckout.onestep.form.consumptionmethod.extra" as="extra"/>
+            </block>
+        </reference>
+    </aw_onestepcheckout_index_index>
+    
+    <ispshop_tributos_add_order_total>
+        <reference name="order_totals">
+            <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_st" />
+            <block type="ispshop_tributos/sales_order_totals_icms" name="total_icms" />
+        </reference>
+    </ispshop_tributos_add_order_total>
+
+    <ispshop_tributos_add_invoice_total>
+        <reference name="invoice_totals">
+            <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_st" />
+            <block type="ispshop_tributos/sales_order_totals_icms" name="total_icms" />
+        </reference>
+    </ispshop_tributos_add_invoice_total>
+
+    <ispshop_tributos_add_creditmemo_total>
+        <reference name="creditmemo_totals">
+            <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_st" />
+            <block type="ispshop_tributos/sales_order_totals_icms" name="total_icms" />
+        </reference>
+    </ispshop_tributos_add_creditmemo_total>
+    
+    <sales_order_view>
+        <update handle="ispshop_tributos_add_order_total" />
+        
+        <reference name="order_totals">
+            <action method="setLabelProperties">
+                <value>colspan="6" class="a-right"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>class="last a-right"</value>
+            </action>
+        </reference>
+         
+        <reference name="order_items">
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/items.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_item_renderer_default</block>
+                <template>ispshop/sales/order/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_item_renderer_grouped</block>
+                <template>ispshop/sales/order/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_view>
+    
+    <sales_order_print>
+        <update handle="ispshop_tributos_add_order_total" />
+        
+        <reference name="order_totals">
+            <action method="setLabelProperties">
+                <value>colspan="6" class="a-right"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>class="last a-right"</value>
+            </action>
+        </reference>
+        
+        <reference name="sales.order.print">
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/print.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_item_renderer_default</block>
+                <template>ispshop/sales/order/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_item_renderer_grouped</block>
+                <template>ispshop/sales/order/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_print>
+        
+  
+    <sales_order_invoice>
+        <update handle="ispshop_tributos_add_invoice_total" />
+        
+        <reference name="invoice_totals">
+            <action method="setLabelProperties">
+                <value>colspan="5" class="a-right"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>class="last a-right"</value>
+            </action>
+        </reference>
+        
+        <reference name="invoice_items">
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/invoice/items.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_item_renderer_default</block>
+                <template>ispshop/sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_item_renderer_grouped</block>
+                <template>ispshop/sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_invoice>
+    
+    <sales_order_creditmemo>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+        
+        <reference name="creditmemo_items">
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/creditmemo/items.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_item_renderer_default</block>
+                <template>ispshop/sales/order/creditmemo/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_item_renderer_grouped</block>
+                <template>ispshop/sales/order/creditmemo/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_creditmemo>
+    
+    
+    <sales_order_printinvoice>
+        <update handle="ispshop_tributos_add_invoice_total" />
+        
+        <reference name="invoice_totals">
+            <action method="setLabelProperties">
+                <value>colspan="5" class="a-right"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>class="last a-right"</value>
+            </action>
+        </reference>
+        
+        <reference name="sales.order.print.invoice">
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/print/invoice.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_item_renderer_default</block>
+                <template>ispshop/sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_item_renderer_grouped</block>
+                <template>ispshop/sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_printinvoice>
+    
+    <sales_order_printcreditmemo>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+        
+        <reference name="sales.order.print.creditmemo">
+            <action method="setTemplate">                
+                <template>ispshop/sales/order/print/creditmemo</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_item_renderer_default</block>
+                <template>ispshop/sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_item_renderer_grouped</block>
+                <template>ispshop/sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_printcreditmemo>
+    
+    <sales_email_order_items>
+        <update handle="ispshop_tributos_add_order_total" />
+        
+        <reference name="order_totals">
+            <action method="setLabelProperties">
+                <value>colspan="5" align="right" style="padding:3px 9px"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>align="right" style="padding:3px 9px"</value>
+            </action>
+        </reference>
+        
+        <reference name="items">
+            <action method="setTemplate">                
+                <template>ispshop/email/order/items.phtml</template>
+            </action>
+            
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_email_items_order_default</block>
+                <template>ispshop/email/order/items/order/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_email_items_order_grouped</block>
+                <template>ispshop/email/order/items/order/default.phtml</template>
+            </action>
+            
+        </reference>
+    </sales_email_order_items>
+    
+    <sales_email_order_invoice_items>
+        <update handle="ispshop_tributos_add_invoice_total" />
+        
+        <reference name="invoice_totals">
+            <action method="setLabelProperties">
+                <value>colspan="5" align="right" style="padding:3px 9px"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>align="right" style="padding:3px 9px"</value>
+            </action>
+        </reference>
+        
+        <reference name="items">
+            <action method="setTemplate">                
+                <template>ispshop/email/order/invoice/items.phtml</template>
+            </action>
+            
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_email_items_order_default</block>
+                <template>ispshop/email/order/items/invoice/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_email_items_order_grouped</block>
+                <template>ispshop/email/order/items/invoice/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_invoice_items>
+    
+    <sales_email_order_creditmemo_items>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+        
+        <reference name="creditmemo_totals">
+            <action method="setLabelProperties">
+                <value>colspan="5" align="right" style="padding:3px 9px"</value>
+            </action>
+            <action method="setValueProperties">
+                <value>align="right" style="padding:3px 9px"</value>
+            </action>
+        </reference>                
+        
+        <reference name="items">
+            <action method="setTemplate">                
+                <template>ispshop/email/order/creditmemo/items.phtml</template>
+            </action>
+            
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_email_items_order_default</block>
+                <template>ispshop/email/order/items/creditmemo/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_email_items_order_grouped</block>
+                <template>ispshop/email/order/items/creditmemo/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_creditmemo_items>
+    
+    <!--<sales_guest_view>
+        <update handle="ispshop_tributos_add_order_total" />
+    </sales_guest_view>
+    <sales_guest_invoice>
+        <update handle="ispshop_tributos_add_invoice_total" />
+    </sales_guest_invoice>
+    <sales_guest_creditmemo>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+    </sales_guest_creditmemo>
+    <sales_guest_print>
+        <update handle="ispshop_tributos_add_order_total" />
+    </sales_guest_print>
+    <sales_guest_printinvoice>
+        <update handle="ispshop_tributos_add_invoice_total" />
+    </sales_guest_printinvoice>
+    <sales_guest_printcreditmemo>
+        <update handle="ispshop_tributos_add_creditmemo_total" />
+    </sales_guest_printcreditmemo>-->
+    
+</layout>
+
