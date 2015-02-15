@@ -33,12 +33,12 @@ class Ispshop_Tributos_Model_Updater {
         ),
         'savePaymentMethod' => array(
             'review_cart' => self::REVIEW_CART_BLOCK_NAME,
-            'consumption_method' => self::CONSUMPTION_METHOD_BLOCK_NAME,
             'review_coupon' => self::REVIEW_COUPON_BLOCK_NAME,
             'review_points' => self::REVIEW_POINTS_BLOCK_NAME,
             'review_referafriend' => self::REVIEW_REFER_A_FRIEND_BLOCK_NAME,
         ),
         'saveConsumptionMethod' => array(
+            'payment_method' => self::PAYMENT_METHOD_BLOCK_NAME,
             'review_cart' => self::REVIEW_CART_BLOCK_NAME,
             'review_coupon' => self::REVIEW_COUPON_BLOCK_NAME,
             'review_points' => self::REVIEW_POINTS_BLOCK_NAME,

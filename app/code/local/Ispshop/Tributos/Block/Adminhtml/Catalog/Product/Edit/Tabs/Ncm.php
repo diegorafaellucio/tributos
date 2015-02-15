@@ -42,11 +42,11 @@ class Ispshop_Tributos_Block_Adminhtml_Catalog_Product_Edit_Tabs_Ncm extends Mag
      * @return string
      */
     public function getTabLabel() {
-        return Mage::helper('ispshop_tributos')->__('Controle Substituição Tributária');
+        return Mage::helper('ispshop_tributos')->__('ICMS-ST');
     }
 
     public function getTabTitle() {
-        return Mage::helper('ispshop_tributos')->__('Controle Substituição Tributária');
+        return Mage::helper('ispshop_tributos')->__('ICMS-ST');
     }
 
     public function canShowTab() {
@@ -85,8 +85,9 @@ class Ispshop_Tributos_Block_Adminhtml_Catalog_Product_Edit_Tabs_Ncm extends Mag
                 ->setOnClick('window.location.href=\'' . $ncmUpdateUrl . '\'')
                 ->setLabel($this->__('Atualizar dados de Substituição Tributária'));
         $buttonUpdate->setStyle('margin:10px;float:none;clear:both;');
-        $grid = $this->getLayout()->createBlock('ispshop_tributos/adminhtml_ncm_grid');
-        $grid->setDefaultFilter(array('order_id' => $id));
+        $grid = $this->getLayout()->createBlock('ispshop_tributos/adminhtml_ncm_gridproduct');
+        $grid->setDefaultFilter(array('product_id' => $id));
+        $grid->setCollection($collection);
         $grid->setFilterVisibility(false);
         $grid->setPagerVisibility(0);
         $grid->setUserMode();

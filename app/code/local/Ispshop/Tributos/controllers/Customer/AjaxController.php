@@ -57,7 +57,7 @@ class Ispshop_Tributos_Customer_AjaxController extends Mage_Checkout_Controller_
 
                     $helper = Mage::helper('ispshop_tributos/ncm_calculo');
 
-                    $valorICMS = $helper->getValorIcms($item, $taxData, $countryRegionCode);
+                    $valorICMS = $helper->getValorIcms($item, $taxData, $countryRegionCode, $this->getOnepage()->getQuote());
 
                     $valorST = $helper->getSubstituicaoTributaria($data, $item, $taxData, $this->getOnepage()->getQuote());
 

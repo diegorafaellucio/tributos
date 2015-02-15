@@ -28,25 +28,25 @@
 ?>
 <?php $blockNumber = $this->getBlockNumber(); ?>
 <?php $blockNumberClass = (!is_null($blockNumber)) ? "aw-onestepcheckout-number-{$blockNumber}" : ""; ?>
-<p style="height: 55px" class="aw-onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $this->__('DESTINO DOS PRODUTOS'); ?></p>
+<p class="aw-onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $this->__('DESTINAÇÃO DOS PRODUTOS'); ?></p>
 <div id="aw-onestepcheckout-consumption-method" class="aw-onestepcheckout-add-loader-into-this-block" >
-    <dl class="cm-methods">
-        <dd>
+    <dl class="sp-methods">
+        <dt>
             <ul>
                 <li>
                     <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="0" id="c_method_0" class="radio"/>
                     <label for="c_method_0">
-                        Uso e/ou Consumo
+                        Para uso e/ou consumo próprio
                     </label>
                 </li>
                 <li>
                     <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="1" id="c_method_1"  class="radio"/>
                     <label for="c_method_1">
-                        Revenda
+                        Para revenda/comercialização
                     </label>
                 </li>
             </ul>
-        </dd>
+        </dt>
     </dl>
     <div class="validation-advice" style="display: none;"></div>
     <script type="text/javascript">

@@ -43,18 +43,17 @@
                 <div id="aw-onestepcheckout-shipping-method-wrapper">
                     <?php echo $this->getChildHtml('shippingmethod'); ?>
                 </div>
-                <div id="aw-onestepcheckout-payment-method-wrapper">
-                    <?php echo $this->getChildHtml('paymentmethod'); ?>
-                </div>
-                
                 <div id="aw-onestepcheckout-consumption-method-wrapper">
                     <?php echo $this->getChildHtml('for_consumption'); ?>
+                </div>
+                <div id="aw-onestepcheckout-payment-method-wrapper">
+                    <?php echo $this->getChildHtml('paymentmethod'); ?>
                 </div>
             </div>
             <div class="aw-onestepchekocut-column aw-onestepchekocut-column-right">
                 <div id="aw-onestepcheckout-order-review">
-                    <?php $blockNumberClass = (!is_null($this->getBlockNumber(false)))?"aw-onestepcheckout-number-v":"";?>
-                    <p class="aw-onestepcheckout-number <?php echo $blockNumberClass;?>"><?php echo $this->__('ORDER REVIEW'); ?></p>
+                    <?php $blockNumberClass = (!is_null($this->getBlockNumber(false))) ? "aw-onestepcheckout-number-v" : ""; ?>
+                    <p class="aw-onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $this->__('ORDER REVIEW'); ?></p>
                     <div id="aw-onestepcheckout-order-review-cart-wrapper">
                         <?php echo $this->getChildHtml('review.cart'); ?>
                     </div>
@@ -100,8 +99,8 @@
         <div id="aw-onestepcheckout-popup" class="aw-onestepcheckout-popup" style="display:none">
             <div id="aw-onestepcheckout-popup-content" class="aw-onestepcheckout-popup-content"></div>
             <div id="aw-onestepcheckout-popup-accept" class="aw-onestepcheckout-popup-accept">
-                <button type="button"><?php echo $this->__('ACCEPT');?></button>
-                <a href="javascript:void(0)"><?php echo $this->__('Close');?></a>
+                <button type="button"><?php echo $this->__('ACCEPT'); ?></button>
+                <a href="javascript:void(0)"><?php echo $this->__('Close'); ?></a>
             </div>
         </div>
         <div id="aw-onestepcheckout-overlay" class="aw-onestepcheckout-popup-overlay" style="display:none"></div>
@@ -133,11 +132,11 @@
                     contentContainerSelector: "#aw-onestepcheckout-popup-content",
                     acceptContainerSelector: "#aw-onestepcheckout-popup-accept",
                     buttons: {
-                        accept:{
+                        accept: {
                             selector: "#aw-onestepcheckout-popup-accept button",
                             enabled: false
                         },
-                        close:{
+                        close: {
                             selector: "#aw-onestepcheckout-popup-accept a",
                             enabled: false
                         }
@@ -160,7 +159,7 @@
             '24px': 'aw-onestepcheckout-overlay aw-onestepcheckout-overlay-24',
             '16px': 'aw-onestepcheckout-overlay aw-onestepcheckout-overlay-16'
         },
-        map: <?php echo Zend_Json::encode($this->getBlockMap());?>,
+        map: <?php echo Zend_Json::encode($this->getBlockMap()); ?>,
         blocks: [
             ['shipping_method', '#aw-onestepcheckout-shipping-method-wrapper'],
             ['payment_method', '#aw-onestepcheckout-payment-method-wrapper'],
@@ -179,7 +178,7 @@
             '24px': 'aw-onestepcheckout-overlay aw-onestepcheckout-overlay-24',
             '16px': 'aw-onestepcheckout-overlay aw-onestepcheckout-overlay-16'
         },
-        map: <?php echo Zend_Json::encode($this->getBlockMap());?>,
+        map: <?php echo Zend_Json::encode($this->getBlockMap()); ?>,
         blocks: [
             ['shipping_method', '#aw-onestepcheckout-shipping-method-wrapper'],
             ['payment_method', '#aw-onestepcheckout-payment-method-wrapper'],
