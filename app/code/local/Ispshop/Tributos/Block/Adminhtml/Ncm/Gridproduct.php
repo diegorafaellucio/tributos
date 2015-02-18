@@ -7,7 +7,7 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Gridproduct extends Mage_Adminhtml_Bl
 
         // Set some defaults for our grid
         $this->setDefaultSort('id');
-        $this->setId('ispshop_tributos_ncm_grid');
+        $this->setId('ispshop_tributos_ncm_grid_product');
         $this->setDefaultDir('asc');
         $this->setSaveParametersInSession(true);
     }
