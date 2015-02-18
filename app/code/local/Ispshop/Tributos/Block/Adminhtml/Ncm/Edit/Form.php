@@ -28,13 +28,17 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
             'method' => 'post'
         ));
 
-        $fieldset = $form->addFieldset('base_fieldset', array(
-            'legend' => Mage::helper('checkout')->__('Informações de Substituição Tributária'),
-            'class' => 'fieldset-wide',
-        ));
+
 
 
         if ($model->getId()) {
+
+            $fieldset = $form->addFieldset('base_fieldset', array(
+                'legend' => Mage::helper('checkout')->__('Informações de Substituição Tributária'),
+                'class' => 'fieldset-wide',
+            ));
+
+
             $name = $_resource->getAttributeRawValue($model->getProductId(), 'name', Mage::app()->getStore());
 
             $fieldset->addField('id', 'hidden', array(
@@ -115,6 +119,11 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
             $data = array();
             foreach ($states as $state) {
 
+                $fieldset = $form->addFieldset('fieldset_' . $state->default_name, array(
+                    'legend' => Mage::helper('checkout')->__($state->default_name),
+                    'class' => 'fieldset-wide ncm-edit',
+                ));
+
                 $estado_entrada = $state->code;
                 $options = array();
                 $monitoramentoItens = Mage::getModel('ispshop_tributos/monitoramento')->getCollection()->addFieldToFilter('ncm', $ncm)->addFieldToFilter('estado_entrada', $estado_entrada);
@@ -123,9 +132,9 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
 
                 foreach ($monitoramentoItens as $item) {
                     if (count($isUpdate->getData()) == 0) {
-                        $options[$item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada] = $item->ncm . "-" . $item->ncm_norma . "-" . $item->descricao_tipi . "-" . $item->descricao_norma . "-" . $item->aliquota_externa . "-" . $item->aliquota_interna . "-" . $item->mva . "-" . $item->mva_ajustada . "-" . $item->mva_ajustada_4;
+                        $options[] = array('value' => $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada, 'label' => $item->ncm . "-" . $item->ncm_norma . "-" . $item->descricao_tipi . "-" . $item->descricao_norma . "-" . $item->aliquota_externa . "-" . $item->aliquota_interna . "-" . $item->mva . "-" . $item->mva_ajustada . "-" . $item->mva_ajustada_4);
                     } else {
-                        $options[$isUpdate->getId() . ':' . $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada] = $item->ncm . "-" . $item->ncm_norma . "-" . $item->descricao_tipi . "-" . $item->descricao_norma . "-" . $item->aliquota_externa . "-" . $item->aliquota_interna . "-" . $item->mva . "-" . $item->mva_ajustada . "-" . $item->mva_ajustada_4;
+                        $options[] = array('value' => $isUpdate->getId() . ':' . $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada, 'label' => $item->ncm . "-" . $item->ncm_norma . "-" . $item->descricao_tipi . "-" . $item->descricao_norma . "-" . $item->aliquota_externa . "-" . $item->aliquota_interna . "-" . $item->mva . "-" . $item->mva_ajustada . "-" . $item->mva_ajustada_4);
                     }
                 }
 
@@ -134,16 +143,19 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
 
                 if (count($options) > 0) {
 
-                    $fieldset->addField('ncm' . $totalNCM, 'select', array(
-                        'label' => $state->default_name,
+                    $fieldset->addField('ncm' . $totalNCM, 'radios', array(
+                        'label' => 'Substituiçao Tributaritária',
                         'name' => 'ncm' . $totalNCM,
+                        'class' => 'input-radio',
                         'value' => '1',
+                        'required' => true,
                         'values' => $options,
                         'disabled' => false,
+                        'style' => "display:inline-block;clear:right",
                         'readonly' => false,
-                        'width' => '100%',
                         'tabindex' => 1
                     ));
+
 
                     if (count($isUpdate->getData()) != 0) {
                         $data['ncm' . $totalNCM] = $isUpdate->getId() . ':' . $isUpdate->getIdMonitoramentoNcm() . ':' . $isUpdate->getProductId() . ':' . $isUpdate->getRegionId();
@@ -156,7 +168,7 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
 
         if ($model->getEntitytId()) {
             $form->setValues($model->getData());
-        }else{
+        } else {
             $form->setValues($data);
         }
 

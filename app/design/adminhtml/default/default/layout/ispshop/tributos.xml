@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <layout>
-    
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ispshop_tributos/css/style.css</name>
+            </action>
+        </reference>
+    </default>
     <ispshop_tributos_add_order_total>
         <reference name="order_totals">
             <block type="ispshop_tributos/sales_order_totals_substituicaotributaria" name="total_substituicaotributaria" />
