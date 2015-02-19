@@ -4,13 +4,14 @@ class Ispshop_Tributos_Helper_Ncm_Calculo extends Mage_Core_Helper_Data {
 
     public function getSubstituicaoTributaria($destino, $item, $taxas, $quote) {
 
+        $isSimples = $quote->getCustomer()->getIsSimples();
         $price = $item->getData('price');
         $icms = $item->getData('value_icms');
         $base = $price + $icms + $this->getFretePercentual($quote, $price);
         $base_de_calculo = null;
 
         if ($destino == 1) {
-            $base_de_calculo = $base + ($base * ($this->getMva($item, $taxas) / 100));
+            $base_de_calculo = $base + ($base * ($this->getMva($item, $taxas, $isSimples) / 100));
         } else {
             $base_de_calculo = $base;
         }
@@ -43,21 +44,27 @@ class Ispshop_Tributos_Helper_Ncm_Calculo extends Mage_Core_Helper_Data {
         return $aliquota;
     }
 
-    private function getMva($item, $taxas) {
+    private function getMva($item, $taxas, $isSimples) {
         $mva = null;
 
         $isImported = $this->isImported($item);
 
-
-        if ($isImported == 1) {
-            $mva = $taxas->getData('mva_ajustada_4');
+        if ($isSimples == '1') {
+            $mva = $taxas->getData('mva');
             if (($mva == null ) || ($mva == '0.00' )) {
-                $mva = $taxas->getData('mva_ajustada_4_origin');
+                $mva = $taxas->getData('mva_origin');
             }
         } else {
-            $mva = $taxas->getData('mva_ajustada');
-            if (($mva == null ) || ($mva == '0.00' )) {
-                $mva = $taxas->getData('mva_ajustada_origin');
+            if ($isImported == 1) {
+                $mva = $taxas->getData('mva_ajustada_4');
+                if (($mva == null ) || ($mva == '0.00' )) {
+                    $mva = $taxas->getData('mva_ajustada_4_origin');
+                }
+            } else {
+                $mva = $taxas->getData('mva_ajustada');
+                if (($mva == null ) || ($mva == '0.00' )) {
+                    $mva = $taxas->getData('mva_ajustada_origin');
+                }
             }
         }
 

@@ -59,6 +59,12 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Gridproduct extends Mage_Adminhtml_Bl
                 )
         );
         
+        $this->addColumn('mva', array(
+            'header' => $this->__('MVA'),
+            'index' => 'mva'
+                )
+        );
+        
         $this->addColumn('mva_ajustada', array(
             'header' => $this->__('MVA Ajustada'),
             'index' => 'mva_ajustada'

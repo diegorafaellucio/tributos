@@ -50,7 +50,7 @@ class Ispshop_Tributos_Customer_AjaxController extends Mage_Checkout_Controller_
                             ->addFieldToFilter('product_id', $productId)
                             ->addFieldToFilter('region_id', $countryRegionCode);
 
-                    $model->join(array('monitoramento' => 'ispshop_tributos/monitoramento'), 'main_table.id_monitoramento_ncm = monitoramento.id', array('id', 'monitoramento.mva_ajustada_4 as mva_ajustada_4_origin', 'monitoramento.mva_ajustada as mva_ajustada_origin', 'monitoramento.aliquota_interna', 'monitoramento.aliquota_interestadual'));
+                    $model->join(array('monitoramento' => 'ispshop_tributos/monitoramento'), 'main_table.id_monitoramento_ncm = monitoramento.id', array('id', 'monitoramento.mva_ajustada_4 as mva_ajustada_4_origin', 'monitoramento.mva_ajustada as mva_ajustada_origin','monitoramento.mva as mva_origin', 'monitoramento.aliquota_interna', 'monitoramento.aliquota_interestadual'));
 
                     $taxData = $model->getFirstItem();
 

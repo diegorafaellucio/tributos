@@ -94,6 +94,9 @@ $tableNCM = $installer->getConnection()
         ->addColumn('mva_ajustada', Varien_Db_Ddl_Table::TYPE_DECIMAL, '16,2', array(
             'nullable' => true,
                 ), 'mva_ajustada')
+        ->addColumn('mva', Varien_Db_Ddl_Table::TYPE_DECIMAL, '16,2', array(
+            'nullable' => true,
+                ), 'mva')
         ->addColumn('mva_ajustada_4', Varien_Db_Ddl_Table::TYPE_DECIMAL, '16,2', array(
     'nullable' => true,
         ), 'mva_ajustada_4');
@@ -197,6 +200,39 @@ $setup->addAttribute('catalog_product', 'is_imported', array(
     'default' => '0',
 ));
 
+$setupCustomer = Mage::getModel('customer/entity_setup', 'core_setup');
+
+$setupCustomer->addAttribute('customer', 'is_simples', array(
+    'label' => 'Possui cadastro no Simples?',
+    //'group'        => 'General',
+    'visible' => 0,
+    'required' => 1,
+    'user_defined' => 0,
+    'position' => 2,
+    'source' => 'eav/entity_attribute_source_boolean',
+    'type' => 'int',
+    'input' => 'boolean',
+    'default' => '0',
+));
+
+
+Mage::getSingleton('eav/config')
+        ->getAttribute('customer', 'is_simples')
+        ->setData('used_in_forms', array('adminhtml_customer', 'customer_account_create', 'customer_account_edit', 'checkout_register'))
+        ->save();
+
+if (version_compare(Mage::getVersion(), '1.6.0', '<=')) {
+    $customer = Mage::getModel('customer/customer');
+    $attrSetId = $customer->getResource()->getEntityType()->getDefaultAttributeSetId();
+    $setup->addAttributeToSet('customer', $attrSetId, 'General', 'is_simples');
+}
+
+if (version_compare(Mage::getVersion(), '1.4.2', '>=')) {
+    Mage::getSingleton('eav/config')
+            ->getAttribute('customer', 'is_simples')
+            ->setData('used_in_forms', array('adminhtml_customer', 'customer_account_create', 'customer_account_edit', 'checkout_register'))
+            ->save();
+}
 
 
 

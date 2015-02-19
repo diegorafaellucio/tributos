@@ -67,13 +67,19 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Grid extends Mage_Adminhtml_Block_Wid
             'index' => 'aliquota_icms_interno'
                 )
         );
-        
+
         $this->addColumn('aliquota_icms_interestadual', array(
             'header' => $this->__('ICMS Externo'),
             'index' => 'aliquota_icms_interestadual'
                 )
         );
-        
+
+        $this->addColumn('mva', array(
+            'header' => $this->__('MVA'),
+            'index' => 'mva'
+                )
+        );
+
         $this->addColumn('mva_ajustada', array(
             'header' => $this->__('MVA Ajustada'),
             'index' => 'mva_ajustada'
