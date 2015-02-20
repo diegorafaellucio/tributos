@@ -81,8 +81,8 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
                 'required' => false,
                 'value' => $model->getAliquotaIcmsInterestadual(),
             ));
-            
-             $fieldset->addField('mva', 'text', array(
+
+            $fieldset->addField('mva', 'text', array(
                 'name' => 'mva',
                 'label' => Mage::helper('ispshop_tributos')->__('MVA'),
                 'title' => Mage::helper('ispshop_tributos')->__('MVA'),
@@ -146,11 +146,11 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
                         $bestID = $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada;
                     }
 
+                    $values = array($item->ncm, $item->ncm_norma, $item->descricao_tipi, $item->descricao_norma, $item->aliquota_interestadual, $item->aliquota_interna, $item->mva, $item->mva_ajustada, $item->mva_ajustada_4, $item->ipi);
                     if (count($isUpdate->getData()) == 0) {
-
-                        $options[] = array('value' => $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada, 'label' => 'NCM: '.$item->ncm . "  NCM NORMA: " . $item->ncm_norma . "  DESCRIÇÃO: " . $item->descricao_tipi . "  DESCRIÇÃO NORMA: " . $item->descricao_norma . "  ALIQUOTA EXTERNA: " . $item->aliquota_externa . "  ALIQUOTA INTERNA: " . $item->aliquota_interna . "  MVA: " . $item->mva . "  MVA AJUSTADA: " . $item->mva_ajustada . "  MVA AJUSTADA 4: " . $item->mva_ajustada_4);
+                        $options[] = array('value' => $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada, 'label' => $values);
                     } else {
-                        $options[] = array('value' => $isUpdate->getId() . ':' . $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada, 'label' => 'NCM: '.$item->ncm . "  NCM NORMA: " . $item->ncm_norma . "  DESCRIÇÃO: " . $item->descricao_tipi . "  DESCRIÇÃO NORMA: " . $item->descricao_norma . "  ALIQUOTA EXTERNA: " . $item->aliquota_externa . "  ALIQUOTA INTERNA: " . $item->aliquota_interna . "  MVA: " . $item->mva . "  MVA AJUSTADA: " . $item->mva_ajustada . "  MVA AJUSTADA 4: " . $item->mva_ajustada_4);
+                        $options[] = array('value' => $isUpdate->getId() . ':' . $item->id . ':' . $this->getRequest()->getParam('product_id') . ':' . $item->estado_entrada, 'label' => $values);
                     }
                 }
 
@@ -165,8 +165,10 @@ class Ispshop_Tributos_Block_Adminhtml_Ncm_Edit_Form extends Mage_Adminhtml_Bloc
                     ));
 
 
-                    $fieldset->addField('ncm' . $totalNCM, 'radios', array(
-                        'label' => 'Substituiçao Tributaritária',
+                    $fieldset->addType('ispshop-radios', 'Ispshop_Tributos_Helper_Form_Element_Radios');
+
+
+                    $fieldset->addField('ncm' . $totalNCM, 'ispshop-radios', array(
                         'name' => 'ncm' . $totalNCM,
                         'class' => 'input-radio',
                         'value' => '1',

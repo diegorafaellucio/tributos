@@ -26,26 +26,35 @@
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
 ?>
+<?php $consumption = Mage::getSingleton('checkout/session')->getQuote()->getForConsumption(); ?>
 <?php $blockNumber = $this->getBlockNumber(); ?>
 <?php $blockNumberClass = (!is_null($blockNumber)) ? "aw-onestepcheckout-number-{$blockNumber}" : ""; ?>
 <p class="aw-onestepcheckout-number <?php echo $blockNumberClass; ?>"><?php echo $this->__('DESTINAÇÃO DOS PRODUTOS'); ?></p>
 <div id="aw-onestepcheckout-consumption-method" class="aw-onestepcheckout-add-loader-into-this-block" >
     <dl class="sp-methods">
         <dt>
-            <ul>
-                <li>
-                    <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="0" id="c_method_0" class="radio"/>
-                    <label for="c_method_0">
-                        Para uso e/ou consumo próprio
-                    </label>
-                </li>
-                <li>
-                    <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="1" id="c_method_1"  class="radio"/>
-                    <label for="c_method_1">
-                        Para revenda/comercialização
-                    </label>
-                </li>
-            </ul>
+        <ul>
+            <li>
+                <?php if ($consumption == '0') {?>
+                <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="0" id="c_method_0" class="radio" checked/>
+                <?php }else{ ?>
+                <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="0" id="c_method_0" class="radio"/>
+                <?php } ?>
+                <label for="c_method_0">
+                    Para uso e/ou consumo próprio
+                </label>
+            </li>
+            <li>
+                <?php if ($consumption == '1') {?>
+                <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="1" id="c_method_1"  class="radio" checked/>
+                <?php }else{ ?>
+                <input name="consumption_method" class="validate-one-required-by-name" type="radio" value="1" id="c_method_1"  class="radio"/>
+                <?php } ?>
+                <label for="c_method_1">
+                    Para revenda/comercialização
+                </label>
+            </li>
+        </ul>
         </dt>
     </dl>
     <div class="validation-advice" style="display: none;"></div>
@@ -56,6 +65,6 @@
             saveShipmentUrl: <?php echo Zend_Json::encode($this->getSaveConsumptiontUrl()); ?>
         });
     </script>
-    <?php echo $this->getChildHtml('extra'); ?>
+<?php echo $this->getChildHtml('extra'); ?>
 </div>
 

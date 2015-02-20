@@ -1,15 +1,3 @@
-
-
-.input-radio:after{
-
-}
-
-label.inline:after{
-    content: '\a';
-    display: block;
-    margin-bottom: 5px;
-}
-
-.ncm-edit .value:first-child{
-    margin-left: 6px !important;
+.ncm-edit .form-list td.label {
+    width: 0 !important;
 }

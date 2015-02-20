@@ -1,11 +1,34 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
+    <checkout_cart_index>
+        
+        
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ispshop_tributos/css/style.css</name>
+            </action>
+        </reference>
+        
+        <reference name="checkout.cart">
+            <action method="setCartTemplate">                
+                <template>ispshop/checkout/cart.phtml</template>
+            </action>
+            <block type="ispshop_tributos/checkout_ncm" name="checkout.cart.ncm" as="cart_consumption" template="ispshop/checkout/cart/for_consumption.phtml"/>
+        </reference>
+    </checkout_cart_index>
+    
     <aw_onestepcheckout_index_index>
         <reference name="aw_onestepcheckout.onestep">
             <block type="ispshop_tributos/customer_ncm" name="aw_onestepcheckout.onestep.form.consumptionmethod"
                    as="for_consumption" template="ispshop/onestep/for_consumption.phtml">
                 <block type="core/text_list" name="aw_onestepcheckout.onestep.form.consumptionmethod.extra" as="extra"/>
             </block>
+        </reference>
+        <reference name="aw_onestepcheckout.onestep.form.shippingmethod">
+            <action method="setTemplate">                
+                <template>ispshop/onestep/shipping_method.phtml</template>
+            </action>
         </reference>
     </aw_onestepcheckout_index_index>
     

@@ -61,7 +61,7 @@
 
 
                 <!-- MIDDLE COLUMN -->
-                <block type="aw_onestepcheckout/onestep_form_shippingmethod" name="aw_onestepcheckout.onestep.form.shippingmethod"
+                <block type="ispshop_tributos/customer_shippingmethod" name="aw_onestepcheckout.onestep.form.shippingmethod"
                        as="shippingmethod" template="aw_onestepcheckout/onestep/form/shipping_method.phtml">
                     <block type="core/text_list" name="aw_onestepcheckout.onestep.form.shippingmethod.extra" as="extra"/>
                 </block>

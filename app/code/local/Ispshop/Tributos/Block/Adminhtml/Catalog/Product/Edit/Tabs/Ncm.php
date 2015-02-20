@@ -70,7 +70,6 @@ class Ispshop_Tributos_Block_Adminhtml_Catalog_Product_Edit_Tabs_Ncm extends Mag
     protected function _toHtml() {
         $id = $this->getRequest()->getParam('id');
         $collection = Mage::getModel('ispshop_tributos/ncm')->getCollection()->addFieldToFilter('product_id', $id);
-        $select = $collection->getSelect();
         $ncmNewUrl = $this->getUrl('/ncm/new', array('product_id' => $id));
         $ncmUpdateUrl = $this->getUrl('/ncm/update', array('product_id' => $id));
         $buttonAdd = $this->getLayout()->createBlock('adminhtml/widget_button')

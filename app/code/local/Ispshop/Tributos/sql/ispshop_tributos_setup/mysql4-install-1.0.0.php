@@ -135,7 +135,7 @@ $tableLog = $installer->getConnection()
 $installer->getConnection()->createTable($tableLog);
 
 //campos adicionais order
-$installer->getConnection()->addColumn($installer->getTable('sales/order'), 'for_consumption', 'TINYINT(1) UNSIGNED  AFTER store_id');
+$installer->getConnection()->addColumn($installer->getTable('sales/order'), 'for_consumption', 'TINYINT(1) UNSIGNED  DEFAULT 0 AFTER store_id');
 $installer->getConnection()->addColumn($installer->getTable('sales/order'), 'amount_st', 'DECIMAL(16,2) UNSIGNED DEFAULT 0 AFTER store_id');
 $installer->getConnection()->addColumn($installer->getTable('sales/order'), 'amount_icms', 'DECIMAL(16,2) UNSIGNED DEFAULT 0 AFTER store_id');
 $installer->getConnection()->addColumn($installer->getTable('sales/order_item'), 'value_st', 'DECIMAL(16,2) UNSIGNED DEFAULT 0 AFTER store_id');
@@ -144,7 +144,7 @@ $installer->getConnection()->addColumn($installer->getTable('sales/order_item'),
 
 
 //campo adicionais quote
-$installer->getConnection()->addColumn($installer->getTable('sales/quote'), 'for_consumption', 'TINYINT(1) UNSIGNED  AFTER store_id');
+$installer->getConnection()->addColumn($installer->getTable('sales/quote'), 'for_consumption', 'TINYINT(1) UNSIGNED DEFAULT 0 AFTER store_id');
 $installer->getConnection()->addColumn($installer->getTable('sales/quote'), 'amount_st', 'DECIMAL(16,2) UNSIGNED DEFAULT 0 AFTER store_id');
 $installer->getConnection()->addColumn($installer->getTable('sales/quote'), 'amount_icms', 'DECIMAL(16,2) UNSIGNED DEFAULT 0 AFTER store_id');
 $installer->getConnection()->addColumn($installer->getTable('sales/quote_item'), 'value_st', 'DECIMAL(16,2) UNSIGNED DEFAULT 0 AFTER store_id');

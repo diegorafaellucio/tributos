@@ -21,10 +21,12 @@ class Ispshop_Tributos_Helper_Ncm_Calculo extends Mage_Core_Helper_Data {
         return $st;
     }
 
-    public function getValorIcms($item, $taxas, $countryRegionCode) {
+    public function getValorIcms($item, $taxas, $countryRegionCode, $quote) {
+
         $price = $item->getData('price');
         $base = $price;
-        $icms = ($base * ($this->getIcms($taxas, $countryRegionCode) / 100));
+        $icmsValue = $this->getIcms($taxas, $countryRegionCode, $item);
+        $icms = (($base * (1 - ($icmsValue / 100)) + $this->getFretePercentual($quote, $price)) * (($icmsValue / 100)));
         return $icms;
     }
 
@@ -54,31 +56,36 @@ class Ispshop_Tributos_Helper_Ncm_Calculo extends Mage_Core_Helper_Data {
             if (($mva == null ) || ($mva == '0.00' )) {
                 $mva = $taxas->getData('mva_origin');
             }
+        } else if ($isImported == 1) {
+            $mva = $taxas->getData('mva_ajustada_4');
+            if (($mva == null ) || ($mva == '0.00' )) {
+                $mva = $taxas->getData('mva_ajustada_4_origin');
+            }
         } else {
-            if ($isImported == 1) {
-                $mva = $taxas->getData('mva_ajustada_4');
-                if (($mva == null ) || ($mva == '0.00' )) {
-                    $mva = $taxas->getData('mva_ajustada_4_origin');
-                }
-            } else {
-                $mva = $taxas->getData('mva_ajustada');
-                if (($mva == null ) || ($mva == '0.00' )) {
-                    $mva = $taxas->getData('mva_ajustada_origin');
-                }
+            $mva = $taxas->getData('mva_ajustada');
+            if (($mva == null ) || ($mva == '0.00' )) {
+                $mva = $taxas->getData('mva_ajustada_origin');
             }
         }
 
         return $mva;
     }
 
-    private function getIcms($taxas, $countryRegionCode) {
+    private function getIcms($taxas, $countryRegionCode, $item) {
 
-        if ($countryRegionCode == Mage::getStoreConfig('ispshop_tributos_config/general/estado', Mage::app()->getStore())) {
-            $icms = Mage::getStoreConfig('ispshop_tributos_config/general/aliquota', Mage::app()->getStore());
+        $isImported = $this->isImported($item);
+
+        if ($isImported) {
+            $icms = 4;
         } else {
-            $icms = $taxas->getData('aliquota_icms_interestadual');
-            if (($icms == null ) || ($icms == '0.00' )) {
-                $icms = $taxas->getData('aliquota_interestadual');
+
+            if ($countryRegionCode == Mage::getStoreConfig('ispshop_tributos_config/general/estado', Mage::app()->getStore())) {
+                $icms = Mage::getStoreConfig('ispshop_tributos_config/general/aliquota', Mage::app()->getStore());
+            } else {
+                $icms = $taxas->getData('aliquota_icms_interestadual');
+                if (($icms == null ) || ($icms == '0.00' )) {
+                    $icms = $taxas->getData('aliquota_interestadual');
+                }
             }
         }
 
@@ -100,20 +107,11 @@ class Ispshop_Tributos_Helper_Ncm_Calculo extends Mage_Core_Helper_Data {
     }
 
     private function getFretePercentual($quote, $price) {
-        $shippingRates = $quote->getShippingAddress()
-                ->collectTotals()
-                ->collectShippingRates()
-                ->getAllShippingRates();
+        $shippingRate = $quote->getShippingAddress()->getShippingAmount();
 
-        $shippingRate = $shippingRates[0];
+        $orderTotal = $quote->getSubtotal();
 
-        $ShippingValue = $shippingRate->getPrice();
-
-        $orderTotal = $quote->getGrandTotal();
-
-        $orderTotalWithoutShippingValue = $orderTotal - $ShippingValue;
-
-        $shippingValueForItem = ($ShippingValue * $price) / $orderTotalWithoutShippingValue;
+        $shippingValueForItem = ($shippingRate * $price) / $orderTotal;
 
         return $shippingValueForItem;
     }

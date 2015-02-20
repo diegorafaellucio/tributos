@@ -48,3 +48,74 @@ and open the template in the editor.
 .aw-onestepcheckout-row .aw-onestepchekocut-column.aw-onestepchekocut-column-left {
     background: none;
 }
+
+
+.cart .consumption {
+    border: 1px solid #f1f1f1;
+    width: 339px;
+}
+.cart .consumption h3 {
+    font-weight: normal;
+    margin: 5px 10px 0;
+    padding: 0;
+}
+.cart .consumption .conteudo {
+    border-top: 1px solid #f1f1f1;
+    margin: 10px;
+    padding-top: 10px;
+}
+.cart .consumption .conteudo fieldset {
+    padding: 0;
+}
+.cart .consumption .conteudo label {
+    color: #34382c;
+    padding: 5px 0;
+    font-size: 12px;
+}
+.cart .consumption .conteudo select {
+    margin: 3px 10px 0 0;
+    width: 81%;
+}
+.cart .consumption .conteudo input {
+    background: none repeat scroll 0 0 #fbfbfb;
+    border-color: #ccc #e5e5e5 #e5e5e5 #ccc;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    color: #666;
+    font-size: 13px;
+    margin-top: 5px;
+    padding: 7px;
+}
+
+.cart .consumption .conteudo button {
+    background-image: url("../images/btn_refresh.png");
+}
+
+.cart .consumption .conteudo button{
+    background-color: #fff;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    border: medium none;
+    color: #666;
+    cursor: pointer;
+    font-family: "DaxRegular";
+    font-size: 16px;
+    font-weight: normal;
+    height: 40px;
+    line-height: 100%;
+    padding-left: 40px;
+    width: 185px;
+}
+.cart .consumption .conteudo button:hover{
+    background-position: center top;
+    color: #fff;
+}
+
+.consumption{
+    margin-bottom: 20px;
+}
+
+.cart .consumption .sp-methods{
+    margin: 0 auto;
+}

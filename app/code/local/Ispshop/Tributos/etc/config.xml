@@ -167,6 +167,18 @@
             </ispshop_tributos_setup>
         </resources>
         
+        <events>
+            <checkout_cart_save_after>
+                <observers>
+                    <cart_Save_After>
+                        <type>singleton</type>
+                        <class>ispshop_tributos/observer</class>
+                        <method>cartSaveAfter</method>
+                    </cart_Save_After>
+                </observers>
+            </checkout_cart_save_after>
+        </events>
+        
         
     </global>
     
@@ -233,4 +245,6 @@
         </layout>
         
     </adminhtml>
+    
+    
 </config>
